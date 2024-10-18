@@ -3,7 +3,7 @@ Title: PDQ Project
 Layout: layout.liquid
 ---
 
-<pdq-json id="people-data">
+<pdq-json id="holiday-data">
 <script type="application/json" slot="json">
 [
   {
@@ -19,5 +19,13 @@ Layout: layout.liquid
     "age": 30
   }
 ]
+
+<pdq-data-request id="posts-data" url="https://www.gov.uk/bank-holidays.json"></pdq-data-request>
+<pdq-table id="bank-holidays" source="holiday-data"></pdq-table>
+<pdq-perspective-viewer height="220px" table="bank-holidays" slicers='["title", "date"]'></pdq-perspective-viewer>
+
 </script>
 </pdq-json>
+
+
+
