@@ -8,3 +8,4 @@
  */
 
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/radio-button/index.js';
