@@ -15,23 +15,37 @@
     orientation="horizontal"
     name="radio-group"
   >
-    <cds-radio-button label-text="England & Wales" value="all"></cds-radio-button>
-    <cds-radio-button label-text="Scotland" value="cloudFoundry"></cds-radio-button>
-    <cds-radio-button label-text="Northern Ireland" value="staging"></cds-radio-button>
+    <cds-radio-button label-text="England & Wales" value="englandAndWales"></cds-radio-button>
+    <cds-radio-button label-text="Scotland" value="scotland"></cds-radio-button>
+    <cds-radio-button label-text="Northern Ireland" value="northernIreland"></cds-radio-button>
   </cds-radio-button-group>
 
     <pdq-data-request id="holidays-data" url="https://purple-pine-028c.leith-green.workers.dev/" data-type="json"
         strategy="neverCache"></pdq-data-request>
 
-    <pdq-transform id="holidays-transform" sources='["holidays-data"]'>
+    <pdq-transform id="holidays-transform" sources='["holidays-data", "country-selector"]'>
         <script type="module" slot="transform">
             export async function transform(sources) {
-                const data = sources;
-                console.log('transforming data', data);
-                const ret = data.map(i => ({
-                    ...i,
-                    title: JSON.stringify(i.title)
-                }));
+                const data = sources[0];
+                const countrySelector = sources[1];
+
+                if (!countrySelector) {
+                    console.log('no countrySelector set');
+                    return []
+                } else if (countrySelector === 'englandAndWales') {
+                    return data['englandAndWales'].events
+                } else if (countrySelector === 'scotland') {
+                    return data['scotland'].events
+                } else if (countrySelector === 'northernIreland') {
+                    return data['northernIreland'].events
+                }
+
+                console.log(`transforming data, countrySelector: ${countrySelector}`, data);
+                // const ret = data.map(i => ({
+                //     ...i,
+                //     title: JSON.stringify(i.title)
+                // }));
+                const ret = data[countrySelector].events
                 console.log('transformed data', ret);
                 return ret;
             }
@@ -45,6 +59,19 @@
     <cds-button href="https://www.ibm.com">
         Button
     </cds-button>
-</body>
 
+<script type="module">
+    // Next
+
+    pdq.dataBroker.setDataSource('country-selector','scotland')
+    document.addEventListener('cds-radio-button-group-changed', (evt) => {
+        // evt.detail should have details of selected radio button
+        console.log(evt)
+        // find and set the dataSource to the country
+        //pdq.dataBroker.setDataSource('country-selector','scotland')
+    })
+</script>
+
+</body>
 </html>
+
