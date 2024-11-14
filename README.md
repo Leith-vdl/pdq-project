@@ -7,6 +7,7 @@ A first protottype of the UK Bank Holidays app, it uses PDQ to render a table wi
 <br>
 While this version of the app is quite rudimentary, it served as a good first look into PDQ, and was built upon to create the final production version
 <br>
+<br>
 <b>Tech Stack:</b>
 <br>
 -Frontend: HTML, JavaScript
