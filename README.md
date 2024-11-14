@@ -5,7 +5,7 @@
 <br>
 A first protottype of the UK Bank Holidays app, it uses PDQ to render a table with holiday dates, and a radio button to switch between countries. Similar the final version of the app, it filters out older holidays, only presenting the user with dates still to come. 
 <br>
-While this version of the app is quite rudimentary, it served as a good first look into PDQ, and was built upon to create the final production version
+While this version of the app is quite rudimentary, it served as a good first look into PDQ, and was built upon to create the final production version.
 <br>
 <br>
 <b>Tech Stack:</b>
